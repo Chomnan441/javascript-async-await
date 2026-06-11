@@ -1,6 +1,6 @@
 // Exercise #6
-let getJohnProfile = async () => {
-  return await new Promise(function (resolve) {
+let getJohnProfile = () => {
+  return new Promise(function (resolve) {
     setTimeout(
       () =>
         resolve({
@@ -8,13 +8,13 @@ let getJohnProfile = async () => {
           age: 20,
           hobbies: ["Coding", "Football"],
         }),
-      2000
+      1000
     );
   });
 };
 
-let getJohnOrders = async () => {
-  return await new Promise(function (resolve) {
+let getJohnOrders = () => {
+  return new Promise(function (resolve) {
     setTimeout(
       () =>
         resolve([
@@ -27,7 +27,7 @@ let getJohnOrders = async () => {
             items: ["orange", "itim"],
           },
         ]),
-      1000
+      1500
     );
   });
 };
@@ -39,15 +39,15 @@ function displayJohnProfile(data) {
 function displayJohnOrders(data) {
   console.log(data);
 }
-getJohnProfile()
-  .then(displayJohnProfile)
-  .then(getJohnOrders)
-  .then(displayJohnOrders);
-console.log("loading...");
 
-// getJohnProfile()
-//   .then(displayJohnProfile)
-// getJohnOrders()
-//   .then(displayJohnOrders);
+async function mainSync(){
+  try{ let data = await getJohnProfile();
+      displayJohnProfile(data);
+      let orders = await getJohnOrders();
+      displayJohnOrders(orders);
+}catch(error){  
+  displayJohnProfileError(error);
+}} 
 
-// console.log("loading...data set2");
+mainSync();
+console.log("loading...")

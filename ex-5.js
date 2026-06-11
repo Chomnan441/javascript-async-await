@@ -1,6 +1,6 @@
 // Exercise #5
-let getJohnProfile =async () => {
-  return await new Promise(function (_, reject) {
+let getJohnProfile = () => {
+  return new Promise(function (_, reject) {
     setTimeout(
       () =>
         reject({
@@ -12,12 +12,21 @@ let getJohnProfile =async () => {
   });
 };
 // Start coding here
-function displayJohnProfile(data){
+function displayJohnProfile(data) {
   console.log(data);
 }
-function displayJohnProfileError(error){
+function displayJohnProfileError(error) {
   console.log(error);
 }
-getJohnProfile().then(displayJohnProfile).catch(displayJohnProfileError);
+async function mainSync() {
+  try {
+    let data = await getJohnProfile();
+    displayJohnProfile(data);
+  }
+  catch (error) {
+    displayJohnProfileError(error);
+  }
+}
+
+mainSync();
 console.log("Data loading....");
-console.log("Something...");

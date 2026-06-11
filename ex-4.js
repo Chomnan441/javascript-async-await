@@ -1,6 +1,6 @@
 // Exercise #4
-let getJohnProfile = async () => {
-  return await new Promise(function (resolve) {
+let getJohnProfile = () => {
+  return new Promise(function (resolve) {
     setTimeout(
       () =>
         resolve({
@@ -13,8 +13,13 @@ let getJohnProfile = async () => {
   });
 };
 // Start coding here
+async function mainSync(){
+  let data = await getJohnProfile();
+  displayJohnProfile(data);
+} 
+
 function displayJohnProfile(data){
   console.log(data);
 }
-getJohnProfile().then(displayJohnProfile);
+mainSync();
 console.log("Data loading....");
